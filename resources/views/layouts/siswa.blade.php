@@ -37,7 +37,7 @@
                         </div>
                     </h6>
                     <div class="dropdown-divider"></div>
-                   
+
                     <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
@@ -61,15 +61,15 @@
                             <div class="nav-link-icon"><i data-feather="activity"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" href="{{ route('siswa.myprofile') }}">
                             <div class="nav-link-icon"><i data-feather="user"></i></div>
                             my profile
                         </a>
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" href="{{ route('letter.index') }}">
                             <div class="nav-link-icon"><i data-feather="mail"></i></div>
                             ijin
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('siswa.rekapabsensi') }}">
                             <div class="nav-link-icon"><i data-feather="aperture"></i></div>
                             rekap absensi
                         </a>

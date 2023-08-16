@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Letter extends Model
 {
     use HasFactory;
+
+    public function siswa() {
+        return $this->belongsTo(Siswa::class, 'siswa_id');
+    }
+
 }

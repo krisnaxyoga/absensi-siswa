@@ -42,6 +42,25 @@ class AbsenController extends Controller
         ->with('message', 'absen berhasil dibuat.');
     }
 
+    public function cekletter($id){
+        $data = Letter::where('siswa_id',$id)->first();
+        return view('petugas.absensi.form',compact('data'));
+    }
+
+    public function konfirmasiletter(Request $request,$id){
+        $data = Letter::find($id);
+        $data->status = $request->status;
+        $data->save();
+
+        $absen = Absen::where('siswa_id',$data->siswa_id)->where('tanggal',$data->date)->first();
+        $absen->keterangan = $request->keterangan;
+        $absen->save();
+
+        return redirect()
+        ->route('absensi.index')
+        ->with('message', 'absen berhasil diperbaharui.');
+    }
+
     public function tidakhadir($id){
         $data = Absen::find($id);
         $data->status = 'tidak hadir';

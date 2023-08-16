@@ -37,9 +37,17 @@
                                 <tbody>
                                     @foreach ($letter as $item)
                                         <tr>
-                                            <td>{{$item->siswa_id}}</td>
+                                            <td>{{$item->siswa->nama_siswa}}</td>
                                             <td>{{$item->keterangan}}</td>
-                                            <td>{{$item->status}}</td>
+                                            <td>
+                                                @if ($item->status == 1)
+                                                    disetujui
+                                                    @elseif ($item->status == 2)
+                                                    tidak disetujui
+                                                    @else
+                                                    diproses
+                                                @endif
+                                            </td>
                                             <td><a href="{{$item->file}}">{{$item->file}}</a></td>
                                         </tr>
                                     @endforeach
@@ -77,7 +85,7 @@
                         <h2>@yield('title')</h2>
                     </div>
                     <div class="card-body">
-                        
+
                         {{-- <a href="{{ route('absensi.create') }}" class="btn btn-primary mb-2">add absen</a> --}}
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -112,16 +120,24 @@
                                             {{$item->tanggal}}
                                         </td>
                                         <td>
-                                            {{$item->status}}
+                                            <span class="badge @if($item->status == 'tidak hadir') badge-danger @else badge-success @endif">{{$item->status}}</span>
 
                                             @if($item->status == 'tidak hadir')
-                                              <a href="#" class="badge badge-danger">cek letter</a>
+                                              <a href="{{ route('absensi.cekletter',$item->siswa_id) }}" class="badge badge-info">cek letter</a>
+                                              <br>
+                                              Keterangan : {{ $item->keterangan }}
                                             @endif
+
                                         </td>
                                         <td>
+                                            @if ($item->status == 'tidak hadir' || $item->status == 'hadir')
+                                           <span class="badge badge-success">sudah absen</span>
+                                            @else
                                             <a href="{{ route('absensi.hadir',$item->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="check"></i></a>
                                             <a href="{{ route('absensi.tidakhadir',$item->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="x"></i></a>
-                                            
+
+                                            @endif
+
                                         </td>
 
                                     </tr>

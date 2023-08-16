@@ -37,7 +37,7 @@
                         </div>
                     </h6>
                     <div class="dropdown-divider"></div>
-                   
+
                     <a class="dropdown-item" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                   document.getElementById('logout-form').submit();">
@@ -77,7 +77,7 @@
                             <div class="nav-link-icon"><i data-feather="aperture"></i></div>
                             absensi
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('pengumuman.index') }}">
                             <div class="nav-link-icon"><i data-feather="message-square"></i></div>
                             Pengumuman
                         </a>

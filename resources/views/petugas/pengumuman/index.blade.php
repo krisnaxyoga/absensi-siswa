@@ -23,7 +23,7 @@
                         <h2>@yield('title')</h2>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('kelas.create') }}" class="btn btn-primary mb-2">add</a>
+                        <a href="{{ route('pengumuman.create') }}" class="btn btn-primary mb-2">add</a>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -43,9 +43,17 @@
                                         <td><a href="{{ $item->file }}" class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="download"></i></a></td>
                                         <td>{{ $item->status }}</td>
                                         <td>
-                                            <a href="{{ route('kelas.edit',$item->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
+                                            @if ($item->status == 'active')
+                                            <a href="{{ route('pengumuman.tidakaktive',$item->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="x"></i></a>
 
-                                            <form class="d-inline" action="{{ route('kelas.destroy',$item->id) }}" method="POST" onSubmit="return confirm('Apakah anda yakin akan menghapus data ini?');">
+                                            @else
+                                            <a href="{{ route('pengumuman.aktive',$item->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="check"></i></a>
+
+                                            @endif
+
+                                            <a href="{{ route('pengumuman.edit',$item->id) }}" class="btn btn-datatable btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
+
+                                            <form class="d-inline" action="{{ route('pengumuman.destroy',$item->id) }}" method="POST" onSubmit="return confirm('Apakah anda yakin akan menghapus data ini?');">
                                                 @csrf
                                                 @method('delete')
 

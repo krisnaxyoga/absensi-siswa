@@ -16,10 +16,10 @@
                                 @endforeach
                             </div>
                         @endif
-                        <form action="@if($model->exists) {{ route('kelas.update', $model->id) }} @else {{ route('kelas.store') }} @endif" method="POST" enctype="multipart/form-data">
+                        <form action="@if($model->exists) {{ route('pengumuman.update', $model->id) }} @else {{ route('pengumuman.store') }} @endif" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method($model->exists ? 'PUT' : 'POST')
-    
+
                             <div class="form-group">
                                 <label class="small mb-1">Judul</label>
                                 <input class="form-control form-control-solid" name="title" type="text" placeholder="title" value="{{ old('title', $model->nama_kelas) }}" />
