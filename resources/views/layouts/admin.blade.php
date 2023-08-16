@@ -73,7 +73,7 @@
                             <div class="nav-link-icon"><i data-feather="users"></i></div>
                             siswa
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('absensi.index')}}">
                             <div class="nav-link-icon"><i data-feather="aperture"></i></div>
                             absensi
                         </a>

@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/petugas/passwordedit/{id}', [\App\Http\Controllers\Petugas\UserController::class, 'passwordedit'])->name('petugas.passwordedit');
     
     Route::post('/petugas/passwordupdate/{id}', [\App\Http\Controllers\Petugas\UserController::class, 'password'])->name('password.update');
+    Route::get('/petugas/absensi', [\App\Http\Controllers\Petugas\AbsenController::class, 'index'])->name('absensi.index');
+    Route::get('/petugas/absensi/create', [\App\Http\Controllers\Petugas\AbsenController::class, 'create'])->name('absensi.create');
+    Route::get('/petugas/absensi/hadir/{id}', [\App\Http\Controllers\Petugas\AbsenController::class, 'hadir'])->name('absensi.hadir');
+    Route::get('/petugas/absensi/tidakhadir/{id}', [\App\Http\Controllers\Petugas\AbsenController::class, 'tidakhadir'])->name('absensi.tidakhadir');
 });
 
 // untuk vendor

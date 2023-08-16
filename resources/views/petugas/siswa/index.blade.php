@@ -48,7 +48,7 @@
                                                 <li><span style="font-weight: bold;">Tgl-lahir  </span>       : {{$item->tgl_lahir}}</li>
                                                 <li><span style="font-weight: bold;">Agama    </span>         : {{$item->agama}}</li>
                                                 <li><span style="font-weight: bold;">Alamat    </span>        : {{$item->alamat}}</li>
-                                                <li><span style="font-weight: bold;">Email Orangtua </span>   : <a href="mailto:{{$item->email_orangtua}}"></a></li>
+                                                <li><span style="font-weight: bold;">Email Orangtua </span>   : <a href="mailto:{{$item->email_orangtua}}">{{$item->email_orangtua}}</a></li>
                                             </ul>
                                         </td>
                                         <td>
