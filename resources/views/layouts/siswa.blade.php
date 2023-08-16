@@ -65,6 +65,10 @@
                             <div class="nav-link-icon"><i data-feather="user"></i></div>
                             my profile
                         </a>
+                        <a class="nav-link" href="/">
+                            <div class="nav-link-icon"><i data-feather="mail"></i></div>
+                            ijin
+                        </a>
                         <a class="nav-link" href="#">
                             <div class="nav-link-icon"><i data-feather="aperture"></i></div>
                             rekap absensi
@@ -81,7 +85,7 @@
         </div>
         <div id="layoutSidenav_content">
             <main class="mt-4">
-                @yield('content')
+                @yield('contents')
             </main>
             <footer class="footer mt-auto footer-light">
                 <div class="container-fluid">

@@ -61,15 +61,15 @@
                             <div class="nav-link-icon"><i data-feather="activity"></i></div>
                             Dashboard
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('petugas.index')}}">
                             <div class="nav-link-icon"><i data-feather="user"></i></div>
                             user
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('kelas.index')}}">
                             <div class="nav-link-icon"><i data-feather="archive"></i></div>
                             kelas
                         </a>
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('siswa.index')}}">
                             <div class="nav-link-icon"><i data-feather="users"></i></div>
                             siswa
                         </a>
@@ -93,7 +93,7 @@
         </div>
         <div id="layoutSidenav_content">
             <main class="mt-4">
-                @yield('content')
+                @yield('contents')
             </main>
             <footer class="footer mt-auto footer-light">
                 <div class="container-fluid">

@@ -31,7 +31,13 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2,3']], function() {
 // untuk superadmin
 Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/admin', [\App\Http\Controllers\Petugas\DashboardController::class, 'index']);
-   
+    Route::resource('/kelas', \App\Http\Controllers\Petugas\KelasController::class);
+    Route::resource('/petugas/siswa', \App\Http\Controllers\Petugas\SiswaController::class);
+
+    Route::resource('/petugas/petugas', \App\Http\Controllers\Petugas\UserController::class);
+    Route::get('/petugas/passwordedit/{id}', [\App\Http\Controllers\Petugas\UserController::class, 'passwordedit'])->name('petugas.passwordedit');
+    
+    Route::post('/petugas/passwordupdate/{id}', [\App\Http\Controllers\Petugas\UserController::class, 'password'])->name('password.update');
 });
 
 // untuk vendor
