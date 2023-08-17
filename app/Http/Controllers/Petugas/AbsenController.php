@@ -53,6 +53,7 @@ class AbsenController extends Controller
         $data->save();
 
         $absen = Absen::where('siswa_id',$data->siswa_id)->where('tanggal',$data->date)->first();
+        $absen->letter_id = $id;
         $absen->keterangan = $request->keterangan;
         $absen->save();
 
@@ -82,9 +83,48 @@ class AbsenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function rekapabsen(Request $request)
     {
-        //
+        if(!$request->all()){
+            $data = Absen::all();
+        }else{
+            $query = Absen::query();
+
+            if ($request->filled('kelas')) {
+                $query->whereHas('siswa', function ($q) use ($request) {
+                    $q->where('kelas_id', $request->kelas);
+                });
+            }
+
+            if ($request->filled('tanggal')) {
+                $query->where('tanggal', $request->tanggal);
+            }
+
+            $data = $query->get();
+        }
+        $kelas = Kelas::all();
+        return view('petugas.rekapabsen.index',compact('data','kelas'));
+    }
+
+    public function pdf(Request $request){
+        if(!$request->all()){
+            $data = Absen::all();
+        }else{
+            $query = Absen::query();
+
+            if ($request->filled('kelas')) {
+                $query->whereHas('siswa', function ($q) use ($request) {
+                    $q->where('kelas_id', $request->kelas);
+                });
+            }
+
+            if ($request->filled('tanggal')) {
+                $query->where('tanggal', $request->tanggal);
+            }
+
+            $data = $query->get();
+        }
+        return view('petugas.rekapabsen.pdf',compact('data'));
     }
 
     /**

@@ -16,10 +16,16 @@ class SiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Siswa::all();
-        return view('petugas.siswa.index',compact('data'));
+        if(!$request->all() || $request->kelas == 'all'){
+            $data = Siswa::all();
+        }else{
+            $data = Siswa::where('kelas_id',$request->kelas)->get();
+        }
+
+        $kelas = Kelas::all();
+        return view('petugas.siswa.index',compact('data','kelas'));
     }
 
     /**
@@ -37,7 +43,7 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-    
+
         $validator = Validator::make($request->all(), [
             'nama_siswa' => 'required',
             'email_orangtua' => 'required',
@@ -114,7 +120,7 @@ class SiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'nama_siswa' => 'required',
             'email_orangtua' => 'required',
@@ -128,7 +134,7 @@ class SiswaController extends Controller
         } else {
 
             $sis = Siswa::find($id);
-            
+
             if ($request->hasFile('foto')) {
                 $feature_image = $request->file('foto');
                 $filename = time() . '.' . $feature_image->getClientOriginalExtension();
@@ -143,7 +149,7 @@ class SiswaController extends Controller
             $data->name = $request->nama_siswa;
             $data->email = $request->email;
             $data->save();
-            
+
             //create post
             $sis->kelas_id = $request->kelas_id;
             $sis->nama_siswa = $request->nama_siswa;

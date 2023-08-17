@@ -11,6 +11,8 @@ use App\Models\Kelas;
 use App\Models\Absen;
 use App\Models\Pengumuman;
 
+use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
@@ -94,4 +96,27 @@ class DashboardController extends Controller
         }
     }
 
+    public function password(){
+        return view('siswa.profile.password');
+    }
+
+    public function updatepassword(Request $request){
+        $id = auth()->user()->id; // Mengambil ID user yang sedang terotentikasi
+
+        $user = User::find($id); // Mencari objek User dengan ID tersebut
+
+        if ($user) {
+            $user->password = Hash::make($request->password);
+            $user->save(); // Menyimpan perubahan pada objek User
+
+            return redirect()->route('password.myprofile')->with('message','Password berhasil di ganti');
+
+        } else {
+            // Handle jika user tidak ditemukan
+            return redirect()->route('password.myprofile')->with('message','User Tidak ditemukan ');
+
+        }
+
+
+    }
 }

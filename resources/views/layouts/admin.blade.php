@@ -77,6 +77,10 @@
                             <div class="nav-link-icon"><i data-feather="aperture"></i></div>
                             absensi
                         </a>
+                        <a class="nav-link" href="{{route('rekapabsensi.index')}}">
+                            <div class="nav-link-icon"><i data-feather="file"></i></div>
+                            rekap absensi
+                        </a>
                         <a class="nav-link" href="{{ route('pengumuman.index') }}">
                             <div class="nav-link-icon"><i data-feather="message-square"></i></div>
                             Pengumuman

@@ -24,6 +24,35 @@
                     </div>
                     <div class="card-body">
                         <a href="{{ route('siswa.create') }}" class="btn btn-primary mb-2">add</a>
+                        <form action="{{ route('siswa.index') }}" method="get">
+                            <div class="d-flex mb-3">
+                                <div class="mr-2">
+
+                    {{-- Untuk mengambil nilai kelas dari URL dan kemudian membuat opsi select dipilih, Anda dapat menggunakan kode berikut: --}}
+@php
+                    $class = Request::get('kelas');
+
+                    if ($class) {
+                    $option = $class;
+                    } else {
+                    $option = '';
+                    }
+                    @endphp
+
+                    <select name="kelas" id="" class="form-control">
+                        <option value="all">--pilih--</option>
+                        @foreach ($kelas as $item)
+                        <option value="{{$item->id}}" {{ $item->id == $option ? 'selected' : '' }}>{{$item->nama_kelas}}/{{$item->jurusan}}</option>
+                        @endforeach
+                    </select>
+                                </div>
+                                <div class="mr-2">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-search" aria-hidden="true"></i> filter
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>

@@ -73,6 +73,10 @@
                             <div class="nav-link-icon"><i data-feather="aperture"></i></div>
                             rekap absensi
                         </a>
+                        <a class="nav-link" href="{{ route('password.myprofile') }}">
+                            <div class="nav-link-icon"><i data-feather="key"></i></div>
+                            password
+                        </a>
                     </div>
                 </div>
                 <div class="sidenav-footer">

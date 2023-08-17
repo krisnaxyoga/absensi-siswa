@@ -48,6 +48,9 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/petugas/absensi/cekletter/{id}', [\App\Http\Controllers\Petugas\AbsenController::class, 'cekletter'])->name('absensi.cekletter');
     Route::get('/petugas/absensi/konfirmasiletter/{id}', [\App\Http\Controllers\Petugas\AbsenController::class, 'konfirmasiletter'])->name('absensi.konfirmasiletter');
 
+    Route::get('/petugas/rekapabsensi', [\App\Http\Controllers\Petugas\AbsenController::class, 'rekapabsen'])->name('rekapabsensi.index');
+
+    Route::get('/petugas/cetakpdf', [\App\Http\Controllers\Petugas\AbsenController::class, 'pdf'])->name('cetakpdf.index');
 
 });
 
@@ -58,5 +61,7 @@ Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
     Route::get('/siswa/myprofile', [\App\Http\Controllers\Siswa\DashboardController::class, 'myprofile'])->name('siswa.myprofile');
     Route::post('/siswa/myprofileupdate/{id}', [\App\Http\Controllers\Siswa\DashboardController::class, 'updateprofile'])->name('siswa.updateprofile');
     Route::get('/siswa/rekapabsensi', [\App\Http\Controllers\Siswa\DashboardController::class, 'rekapabsensi'])->name('siswa.rekapabsensi');
+    Route::get('/siswa/myprofile/password', [\App\Http\Controllers\Siswa\DashboardController::class, 'password'])->name('password.myprofile');
+    Route::post('/siswa/updatepassword', [\App\Http\Controllers\Siswa\DashboardController::class, 'updatepassword'])->name('passwordupdate');
 
 });
