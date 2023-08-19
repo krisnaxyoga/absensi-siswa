@@ -107,7 +107,8 @@ class AbsenController extends Controller
     }
 
     public function pdf(Request $request){
-        if(!$request->all()){
+        // dd($request->all());
+        if(!$request->all() || $request->tanggal == null){
             $data = [];
         }else{
             $query = Absen::query();
