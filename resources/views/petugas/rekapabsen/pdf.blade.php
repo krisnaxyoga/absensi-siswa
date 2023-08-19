@@ -50,7 +50,7 @@
                                             <span class="badge @if($item->status == 'tidak hadir') badge-danger @else badge-success @endif">{{$item->status}}</span>
 
                                             @if($item->status == 'tidak hadir')
-                                              <a href="{{ route('absensi.cekletter',$item->siswa_id) }}" class="badge badge-info">cek letter</a>
+                                              {{-- <a href="{{ route('absensi.cekletter',$item->siswa_id) }}" class="badge badge-info">cek letter</a> --}}
                                               <br>
                                               Keterangan : {{ $item->keterangan }}
                                             @endif
