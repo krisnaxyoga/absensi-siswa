@@ -86,7 +86,7 @@ class AbsenController extends Controller
     public function rekapabsen(Request $request)
     {
         if(!$request->all()){
-            $data = Absen::all();
+            $data = [];
         }else{
             $query = Absen::query();
 
