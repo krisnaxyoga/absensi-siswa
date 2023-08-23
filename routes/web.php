@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //  jika user belum login
-Route::group(['middleware' => 'guest'], function() {
+Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
     Route::post('/login', [\App\Http\Controllers\AuthController::class, 'dologin']);
     Route::post('/regisanggota', [\App\Http\Controllers\AuthController::class, 'regisanggota'])->name('doregist');
@@ -22,14 +22,14 @@ Route::group(['middleware' => 'guest'], function() {
 });
 
 // untuk superadmin dan agent dan vendor
-Route::group(['middleware' => ['auth', 'checkrole:1,2,3']], function() {
+Route::group(['middleware' => ['auth', 'checkrole:1,2,3']], function () {
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::get('/redirect', [\App\Http\Controllers\RedircetController::class, 'cek']);
 });
 
 
 // untuk superadmin
-Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
+Route::group(['middleware' => ['auth', 'checkrole:1']], function () {
     Route::get('/admin', [\App\Http\Controllers\Petugas\DashboardController::class, 'index']);
     Route::resource('/kelas', \App\Http\Controllers\Petugas\KelasController::class);
     Route::resource('/petugas/siswa', \App\Http\Controllers\Petugas\SiswaController::class);
@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
 
     Route::post('/petugas/passwordupdate/{id}', [\App\Http\Controllers\Petugas\UserController::class, 'password'])->name('password.update');
     Route::get('/petugas/absensi', [\App\Http\Controllers\Petugas\AbsenController::class, 'index'])->name('absensi.index');
+    Route::get('/petugas/surat-ijin', [\App\Http\Controllers\Petugas\AbsenController::class, 'surat_ijin'])->name('absensi.surat_ijin');
     Route::get('/petugas/absensi/create', [\App\Http\Controllers\Petugas\AbsenController::class, 'create'])->name('absensi.create');
     Route::get('/petugas/absensi/hadir/{id}', [\App\Http\Controllers\Petugas\AbsenController::class, 'hadir'])->name('absensi.hadir');
     Route::get('/petugas/absensi/tidakhadir/{id}', [\App\Http\Controllers\Petugas\AbsenController::class, 'tidakhadir'])->name('absensi.tidakhadir');
@@ -49,19 +50,19 @@ Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/petugas/absensi/konfirmasiletter/{id}', [\App\Http\Controllers\Petugas\AbsenController::class, 'konfirmasiletter'])->name('absensi.konfirmasiletter');
 
     Route::get('/petugas/rekapabsensi', [\App\Http\Controllers\Petugas\AbsenController::class, 'rekapabsen'])->name('rekapabsensi.index');
+    Route::get('/petugas/rekapabsensi/set-tidak-hadir/{absen}', [\App\Http\Controllers\Petugas\AbsenController::class, 'set_tidak_hadir'])->name('rekapabsensi.set_tidak_hadir');
 
     Route::get('/petugas/cetakpdf', [\App\Http\Controllers\Petugas\AbsenController::class, 'pdf'])->name('cetakpdf.index');
-
 });
 
 // untuk vendor
-Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
+Route::group(['middleware' => ['auth', 'checkrole:2']], function () {
     Route::get('/siswa', [\App\Http\Controllers\Siswa\DashboardController::class, 'index'])->name('siswa');
     Route::resource('/siswa/letter', \App\Http\Controllers\Siswa\LetterController::class);
     Route::get('/siswa/myprofile', [\App\Http\Controllers\Siswa\DashboardController::class, 'myprofile'])->name('siswa.myprofile');
     Route::post('/siswa/myprofileupdate/{id}', [\App\Http\Controllers\Siswa\DashboardController::class, 'updateprofile'])->name('siswa.updateprofile');
     Route::get('/siswa/rekapabsensi', [\App\Http\Controllers\Siswa\DashboardController::class, 'rekapabsensi'])->name('siswa.rekapabsensi');
+    Route::get('/siswa/rekap-absensi', [\App\Http\Controllers\Siswa\DashboardController::class, 'detail'])->name('siswa.rekapabsensi_detail');
     Route::get('/siswa/myprofile/password', [\App\Http\Controllers\Siswa\DashboardController::class, 'password'])->name('password.myprofile');
     Route::post('/siswa/updatepassword', [\App\Http\Controllers\Siswa\DashboardController::class, 'updatepassword'])->name('passwordupdate');
-
 });

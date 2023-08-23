@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $data = Petugas::all();
-        return view('petugas.user.index',compact('data'));
+        return view('petugas.user.index', compact('data'));
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
     public function create()
     {
         $model = new Petugas;
-        return view('petugas.user.add',compact('model'));
+        return view('petugas.user.add', compact('model'));
     }
 
     /**
@@ -70,18 +70,18 @@ class UserController extends Controller
      */
     public function passwordedit($id)
     {
-        return view('petugas.user.edit',compact('id'));
+        return view('petugas.user.edit', compact('id'));
     }
 
-    public function password(Request $request,$id)
+    public function password(Request $request, $id)
     {
         $data = User::find($id);
         $data->password = Hash::make($request->password);
         $data->save();
 
         return redirect()
-        ->route('petugas.index')
-        ->with('message', 'Password berhasil disimpan.');
+            ->route('petugas.index')
+            ->with('message', 'Password berhasil disimpan.');
     }
 
     /**
@@ -90,7 +90,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $model = Petugas::find($id);
-        return view('petugas.user.add',compact('model'));
+        return view('petugas.user.add', compact('model'));
     }
 
     /**
@@ -108,15 +108,12 @@ class UserController extends Controller
                 ->withErrors($validator->errors())
                 ->withInput($request->all());
         } else {
-            
-
-            $pet = new Petugas;
+            $pet = Petugas::where('id', $id)->exists() ? Petugas::find($id) : new Petugas;
             $pet->nama_petugas = $request->nama_petugas;
             $pet->phone = $request->phone;
             $pet->alamat = $request->alamat;
             $pet->save();
-
-            $data = User::find($pet->user_id);
+            $data = User::where('id', $pet->user_id)->first();
             $data->name = $request->nama_petugas;
             $data->email = $request->email;
             $data->save();
